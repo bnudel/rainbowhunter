@@ -1,0 +1,245 @@
+/* app/globals.css */
+:root {
+  --bg: #0b0f1a;
+  --panel: rgba(16, 21, 36, 0.86);
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --text: #eef2ff;
+  --muted: #9aa6c4;
+  --accent: #ffd166;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+#map { position: fixed; inset: 0; z-index: 0; }
+
+.panel {
+  position: fixed;
+  z-index: 1000;
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+.top-left {
+  top: 16px;
+  left: 16px;
+  padding: 14px 16px;
+  max-width: 320px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.title .arc {
+  width: 22px; height: 12px;
+  border-radius: 22px 22px 0 0;
+  border: 3px solid transparent;
+  border-bottom: none;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    conic-gradient(from 270deg at 50% 100%, #e63946, #f77f00, #ffd166, #06d6a0, #3a86ff, #7b2cbf) border-box;
+}
+.subtitle { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.45; }
+
+.btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--panel-border);
+  background: #1b2440;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover { background: #243056; }
+.btn:disabled { opacity: 0.6; cursor: default; }
+
+.status { margin-top: 8px; font-size: 12px; color: var(--muted); min-height: 16px; }
+
+.bottom-bar {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  width: min(680px, calc(100% - 32px));
+  padding: 14px 18px;
+}
+.slider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.slider-time { font-size: 16px; font-weight: 700; }
+.slider-rel { font-size: 12.5px; color: var(--muted); }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.ticks {
+  display: flex; justify-content: space-between;
+  font-size: 10.5px; color: var(--muted); margin-top: 4px;
+}
+
+.legend {
+  bottom: 110px;
+  right: 16px;
+  padding: 10px 12px;
+  font-size: 11.5px;
+}
+.legend-bar {
+  height: 10px; width: 160px; border-radius: 6px; margin: 6px 0 4px;
+  background: linear-gradient(90deg, #7b2cbf, #3a86ff, #06d6a0, #ffd166, #f77f00, #e63946);
+}
+.legend-row { display: flex; justify-content: space-between; color: var(--muted); }
+.attrib {
+  position: fixed; z-index: 1000; right: 8px; bottom: 4px;
+  font-size: 10px; color: var(--muted); opacity: 0.8;
+}
+.attrib a { color: var(--muted); }
+
+/* ---- Interpolated field overlay ---- */
+/* Slight blur smooths the upscaled raster so it reads as a continuous field. */
+.field-overlay { image-rendering: auto; filter: blur(2px); }
+
+/* ---- "Why here?" popup ---- */
+.leaflet-popup-content-wrapper.why-popup,
+.why-popup .leaflet-popup-content-wrapper {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+.why-popup .leaflet-popup-content { margin: 12px 14px; width: 248px !important; }
+.why-popup .leaflet-popup-tip { background: var(--panel); }
+.why-popup a.leaflet-popup-close-button { color: var(--muted); }
+
+.why-head { display: flex; align-items: baseline; gap: 8px; }
+.why-pct { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+.why-sub { font-size: 11px; color: var(--muted); }
+.why-text { margin: 6px 0 10px; font-size: 12px; line-height: 1.45; color: #cfd7f2; }
+.why-text b { color: var(--text); }
+
+.fb-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; font-size: 11px; }
+.fb-name { width: 74px; color: var(--muted); }
+.fb-track { flex: 1; height: 7px; background: rgba(255,255,255,0.08); border-radius: 5px; overflow: hidden; }
+.fb-fill { height: 100%; border-radius: 5px;
+  background: linear-gradient(90deg, #3a86ff, #06d6a0, #ffd166, #f77f00, #e63946); }
+.fb-pct { width: 30px; text-align: right; color: var(--text); font-variant-numeric: tabular-nums; }
+
+.spark-title { margin: 12px 0 4px; font-size: 10.5px; color: var(--muted); }
+.spark {
+  display: flex; align-items: flex-end; gap: 2px;
+  height: 46px; padding: 4px; background: rgba(255,255,255,0.04); border-radius: 8px;
+}
+.spark-bar {
+  flex: 1; min-width: 0; border: none; padding: 0; border-radius: 2px 2px 0 0;
+  cursor: pointer; opacity: 0.85; transition: opacity 0.1s;
+}
+.spark-bar:hover { opacity: 1; }
+.spark-bar.sel { outline: 2px solid #fff; outline-offset: 0; opacity: 1; }
+.spark-ticks { display: flex; justify-content: space-between; font-size: 9.5px; color: var(--muted); margin-top: 3px; }
+
+/* Secondary button variant (Jump to best spot) */
+.btn.ghost { margin-top: 8px; background: transparent; border-color: rgba(255,209,102,0.4); color: var(--accent); }
+.btn.ghost:hover:not(:disabled) { background: rgba(255,209,102,0.08); }
+
+/* =========================================================================
+   Mobile + tablet support
+   ========================================================================= */
+
+/* Prevent iOS auto-inflating text; kill the grey tap flash on buttons. */
+html { -webkit-text-size-adjust: 100%; }
+.btn, .spark-bar { -webkit-tap-highlight-color: transparent; }
+
+/* Honor notch / home-indicator safe areas on phones. */
+.top-left   { top: calc(16px + env(safe-area-inset-top)); left: calc(16px + env(safe-area-inset-left)); }
+.bottom-bar { bottom: calc(20px + env(safe-area-inset-bottom)); }
+
+/* ---- Small tablets / large phones ---- */
+@media (max-width: 768px) {
+  .top-left { max-width: 270px; padding: 12px 14px; }
+  .title { font-size: 16px; }
+  .subtitle { font-size: 11.5px; }
+  .btn { padding: 8px 10px; font-size: 12.5px; margin-top: 10px; }
+  .bottom-bar { width: calc(100% - 24px); padding: 12px 16px; }
+  .legend { bottom: calc(96px + env(safe-area-inset-bottom)); }
+  .legend-bar { width: 130px; }
+}
+
+/* ---- Phones ---- */
+@media (max-width: 480px) {
+  .top-left {
+    top: calc(8px + env(safe-area-inset-top));
+    left: calc(8px + env(safe-area-inset-left));
+    right: auto;
+    max-width: 62vw;
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+  .title { font-size: 15px; gap: 6px; }
+  .title .arc { width: 18px; height: 10px; }
+  .subtitle { display: none; }          /* keep the control panel short */
+  .btn { margin-top: 8px; padding: 9px 10px; font-size: 12.5px; }
+  .btn.ghost { margin-top: 6px; }
+  .status { font-size: 11px; margin-top: 6px; }
+
+  /* Legend: compact, moved to top-right and out of the slider's way. */
+  .legend {
+    top: calc(8px + env(safe-area-inset-top));
+    right: calc(8px + env(safe-area-inset-right));
+    bottom: auto;
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+  .legend-bar { width: 92px; height: 8px; }
+
+  /* Slider sits a touch higher so the bottom strip stays free for attribution. */
+  .bottom-bar {
+    bottom: calc(26px + env(safe-area-inset-bottom));
+    width: calc(100% - 16px);
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+  .slider-time { font-size: 14px; }
+  .slider-rel { font-size: 11px; }
+  .ticks { font-size: 9.5px; }
+  input[type="range"] { height: 28px; }   /* larger touch target for the thumb */
+
+  .attrib {
+    left: calc(8px + env(safe-area-inset-left));
+    right: auto;
+    bottom: calc(4px + env(safe-area-inset-bottom));
+    font-size: 9px;
+  }
+
+  /* "Why here?" popup: fit within the screen, never overflow. */
+  .why-popup .leaflet-popup-content { margin: 10px 12px; width: min(74vw, 248px) !important; }
+  .why-pct { font-size: 22px; }
+  .why-text { font-size: 11.5px; }
+  .spark { height: 40px; }
+}
+
+/* ---- Short landscape (phones turned sideways): reclaim vertical space ---- */
+@media (max-height: 480px) and (orientation: landscape) {
+  .subtitle { display: none; }
+  .top-left { padding: 10px 12px; max-width: 240px; }
+  .btn { margin-top: 6px; padding: 7px 10px; }
+  .bottom-bar { bottom: calc(10px + env(safe-area-inset-bottom)); padding: 8px 14px; }
+  .legend { display: none; }   /* not enough room; popups still explain colors */
+}
